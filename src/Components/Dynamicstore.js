@@ -8,7 +8,7 @@ export default function Dynamicstore(){
         <div>
             <header>
         <ul class='header'>
-            <li><a href="./index.html">HOME</a></li>
+            <li><a href="#">HOME</a></li>
             <li><a href="#">STORE</a></li>
             <li><a onClick={()=>navigate(`/about`)}>ABOUT</a></li>
             <a href="#cart" class="cart-holder">cart<span class='cart-number'>0</span></a>
