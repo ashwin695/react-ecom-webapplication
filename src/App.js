@@ -1,15 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import About from './Components/About';
-import Dynamicstore from './Components/Dynamicstore';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import About from "./Page/About";
+import Store from "./Page/Store";
+import Home from "./Page/Home";
+import ContactUs from "./Page/Contactus";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          <Route element={ <About /> } path="/about"></Route>
-          <Route element={ <Dynamicstore /> } path="/home"></Route>
+          <Route element={<Home />} path="/"></Route>
+          <Route element={<About />} path="/about"></Route>
+          <Route element={<Store />} path="/store"></Route>
+          <Route element={<ContactUs />} path="/contactus"></Route>
         </Routes>
       </Router>
     </div>

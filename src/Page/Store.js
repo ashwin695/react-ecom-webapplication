@@ -1,20 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../Components/Header";
 
-export default function Dynamicstore(){
+export default function Store(){
     var navigate = useNavigate()
 
     return(
         <div>
-            <header>
-        <ul class='header'>
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">STORE</a></li>
-            <li><a onClick={()=>navigate(`/about`)}>ABOUT</a></li>
-            <a href="#cart" class="cart-holder">cart<span class='cart-number'>0</span></a>
-        </ul>
-        <h1>The Generics</h1>
-    </header>
+            <Header />
 
     <section id="music" class="container">
         <h2>MUSIC</h2>
