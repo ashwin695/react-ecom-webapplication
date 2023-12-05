@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
-/* import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push } from 'firebase/database'; */
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({

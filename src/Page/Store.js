@@ -2,8 +2,44 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 
+const cartElements = [
+    {
+        id: 'album-1',
+        title: 'Colors',      
+        price: 100,    
+        imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+        quantity: 2,
+    },
+    {
+        id: 'album-2',
+        title: 'Black and white Colors',
+        price: 50,
+        imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+        quantity: 3,
+    },
+    {
+        id: 'album-3',
+        title: 'Yellow and Black Colors',
+        price: 70,
+        imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+        quantity: 1,
+    },
+    {
+        id: 'album-4',
+        title: 'Blue Color',
+        price: 100,
+        imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+        quantity: 1,
+    }
+]
+
 export default function Store(){
     var navigate = useNavigate()
+
+    const handleProductView = (item) => {
+        navigate(`/productview/${item.id}/${item.title}`)
+        //console.log(item)
+    }
 
     return(
         <div>
@@ -12,46 +48,25 @@ export default function Store(){
     <section id="music" class="container">
         <h2>MUSIC</h2>
         <div id ="music-content">
-            <div id='album1'>
-                <h3>Colors</h3>
-                <div class="image-container">
-                    <img class="prod-images" src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png" alt=""/>
-                </div>
-                <div class="prod-details">
-                    <span>100/-- rs</span>
-                    <button class="shop-item-button" type='button'>ADD TO CART</button>
-                </div>
-            </div>
-            <div id='album2'>
-                <h3>Black and white Colors</h3>
-                <div class="image-container">
-                    <img class="prod-images" src="https://prasadyash2411.github.io/ecom-website/img/Album%202.png" alt=""/>
-                </div>
-                <div class="prod-details">
-                    <span>50/-- rs</span>
-                    <button class="shop-item-button" type='button'>ADD TO CART</button>
-                </div>
-            </div>
-            <div id='album3'>
-                <h3>Yellow and Black Colors</h3>
-                <div class="image-container">
-                    <img class="prod-images" src="https://prasadyash2411.github.io/ecom-website/img/Album%203.png" alt=""/>
-                </div>
-                <div class="prod-details">
-                    <span>70/-- rs</span>
-                    <button class="shop-item-button" type='button'>ADD TO CART</button>
-                </div>
-            </div>
-            <div id='album4'>
-                <h3>Blue Color</h3>
-                <div class="image-container">
-                    <img class="prod-images" src="https://prasadyash2411.github.io/ecom-website/img/Album%204.png" alt=""/>
-                </div>
-                <div class="prod-details">
-                    <span>100/-- rs</span>
-                    <button class="shop-item-button" type='button'>ADD TO CART</button>
-                </div>
-            </div>
+            {
+                cartElements.map((item)=>{
+                    return(
+                        <div id={item.id} onClick={()=>handleProductView(item)}>
+                            <h3>{item.title}</h3>
+                            <div class="image-container">
+                                <img class="prod-images" src={item.imageUrl} alt=""/>
+                            </div>
+                            <div class="prod-details">
+                                <span>Stock: {item.quantity} item left</span>
+                            </div>
+                            <div class="prod-details">
+                                <span>{item.price}/-- rs</span>
+                                <button class="shop-item-button" type='button'>ADD TO CART</button>
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </div>
          
 
