@@ -11,7 +11,7 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ backgroundColor: "whitesmoke" }}>
                 <Toolbar>
-                    <div style={{ color:'#000', marginLeft:40, fontSize:35, fontFamily:'cursive' }}>
+                    <div style={{ color:'#000', marginLeft:40, fontSize:'3vw', fontFamily:'cursive' }}>
                         The Generics
                     </div>
                     <Typography
@@ -25,6 +25,7 @@ export default function Header() {
                             <div onClick={()=>navigate(`/about`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>ABOUT</div>
                             <div onClick={()=>navigate(`/store`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>STORE</div>
                             <div onClick={()=>navigate(`/contactus`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>CONTACT US</div>
+                            <div onClick={()=>navigate(`/login`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>LOGIN</div>
                         </div>
                     </Typography>
                 </Toolbar>
