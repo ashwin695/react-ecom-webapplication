@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from './auth-context';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,19 @@ const ContactUs = () => {
     email: '',
     phoneNumber: '',
   });
+
+    const navigate = useNavigate()
+    const authCtx = useContext(AuthContext)
+
+    const isLoggedIn = authCtx.isLoggedIn
+
+    useEffect(function(){
+        isLoggedIn
+        ?
+        showPage()
+        : 
+        navigate('/')
+    })
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,8 +52,9 @@ const ContactUs = () => {
     alert('Form submitted successfully!');
   };
 
-  return (
-    <Container className="mt-4 text-center">
+  function showPage(){
+    return(
+      <Container className="mt-4 text-center">
       <h1 className="mb-4">Contact Us</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
@@ -81,6 +97,11 @@ const ContactUs = () => {
         </Button>
       </Form>
     </Container>
+    )
+  }
+
+  return (
+    <div>{showPage()}</div>
   );
 };
 

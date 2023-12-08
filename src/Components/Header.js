@@ -44,7 +44,7 @@ export default function Header() {
                             )}
                             {
                                 !isLoggedIn && (
-                                    <div onClick={()=>navigate(`/login`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>LOGIN</div>
+                                    <div onClick={()=>navigate(`/`)} style={{ cursor:'pointer', margin:'0px 60px 0px 60px' }}>LOGIN</div>
                             )}
                         </div>
                     </Typography>

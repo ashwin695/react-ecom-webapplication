@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import Header from "../Components/Header"
 import Button from '@mui/material/Button';
+import AuthContext from "./auth-context";
 
 const cartElements = [
     {
@@ -37,6 +38,18 @@ const cartElements = [
 export default function ProductView(){
     const [data, setData] = useState([])
     var params = useParams()
+    const navigate = useNavigate()
+    const authCtx = useContext(AuthContext)
+
+    const isLoggedIn = authCtx.isLoggedIn
+
+    useEffect(function(){
+        isLoggedIn
+        ?
+        showPage()
+        : 
+        navigate('/')
+    })
 
     useEffect(function(){
         fetchData()
@@ -46,33 +59,38 @@ export default function ProductView(){
         var result = cartElements.find(t => t.id === params.id)
         setData(result)
     }
-    
+
+    function showPage(){
+        return(
+            <div>
+                <div>
+                    <Header />
+                </div>
+                <div style={{ display:'flex', marginTop:20 }}>
+                    <div class="image-container" style={{ padding:20, width:500, height:500 }}>
+                        <img class="prod-images" src={data.imageUrl} alt="" width="400px"/>
+                    </div>
+
+                    <div id={data.id} style={{ margin:30, padding:20 }}>
+                        <h1>{data.title}</h1>
+                        <div style={{ marginTop:30}}>
+                            <span style={{ fontWeight:700 }}>Special Price</span>
+                            <div style={{ color:'green', fontSize:28, marginTop:10, fontWeight:600 }}>{data.price}/-- rs</div>
+                        </div>
+                        <div class="prod-details" style={{ marginTop:30}}>
+                            <span style={{ fontSize:14, fontWeight:600 }}>Stock: </span>
+                            <span style={{ color:'red', fontWeight:600}}> {data.quantity} item left </span>
+                        </div>
+                        <div class="prod-details" style={{ marginTop: 30 }}>
+                            <Button variant="contained" fullWidth sx={{ backgroundColor:'#000', }}>Add to cart</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return(
-        <div>
-            <div>
-                <Header />
-            </div>
-            <div style={{ display:'flex', marginTop:20 }}>
-                <div class="image-container" style={{ padding:20, width:500, height:500 }}>
-                    <img class="prod-images" src={data.imageUrl} alt="" width="400px"/>
-                </div>
-
-                <div id={data.id} style={{ margin:30, padding:20 }}>
-                    <h1>{data.title}</h1>
-                    <div style={{ marginTop:30}}>
-                        <span style={{ fontWeight:700 }}>Special Price</span>
-                        <div style={{ color:'green', fontSize:28, marginTop:10, fontWeight:600 }}>{data.price}/-- rs</div>
-                    </div>
-                    <div class="prod-details" style={{ marginTop:30}}>
-                        <span style={{ fontSize:14, fontWeight:600 }}>Stock: </span>
-                        <span style={{ color:'red', fontWeight:600}}> {data.quantity} item left </span>
-                    </div>
-                    <div class="prod-details" style={{ marginTop: 30 }}>
-                        <Button variant="contained" fullWidth sx={{ backgroundColor:'#000', }}>Add to cart</Button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div>{showPage()}</div>
     )
 }

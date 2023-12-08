@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../Components/Header';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from './auth-context';
 
 export default function About(){
+    const navigate = useNavigate()
+    const authCtx = useContext(AuthContext)
 
-    return(
-        <div>
+    const isLoggedIn = authCtx.isLoggedIn
+
+    useEffect(function(){
+        isLoggedIn
+        ?
+        showPage()
+        : 
+        navigate('/')
+    })
+
+    function showPage(){
+        return(
+            <div>
             <Header />
     
     <section id="about">
@@ -34,6 +49,13 @@ export default function About(){
             </ul>
         </div>
     </footer>
+        </div>
+        )
+    }
+
+    return(
+        <div>
+            {showPage()}
         </div>
     )
 }
