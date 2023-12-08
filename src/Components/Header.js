@@ -5,8 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Page/auth-context";
+import { Badge, Nav } from "react-bootstrap";
 
-export default function Header() {
+export default function Header({setIsCartOpen, cartElements}) {
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
 
@@ -40,6 +41,17 @@ export default function Header() {
                                     <div onClick={()=>navigate(`/store`)} style={{ cursor:'pointer', margin:'0px 30px 0px 30px' }}>STORE</div>
                                     <div onClick={()=>navigate(`/contactus`)} style={{ cursor:'pointer', margin:'0px 30px 0px 30px' }}>CONTACT US</div>
                                     <div onClick={logoutHandler} style={{ cursor:'pointer', margin:'0px 30px 0px 30px' }}>LOGOUT</div>
+                                    <Nav>
+                                        <Nav.Link
+                                        href="#cart"
+                                        style={{ fontSize: '30px', marginLeft: '40vh' }}
+                                        className="ml-auto"
+                                        onClick={() => setIsCartOpen(true)}
+                                        >
+                                        Cart{' '}
+                                        <Badge variant="secondary">{cartElements.length}</Badge>
+                                        </Nav.Link>
+                                    </Nav>
                                 </span>
                             )}
                             {

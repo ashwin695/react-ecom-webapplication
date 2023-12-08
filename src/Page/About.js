@@ -3,7 +3,7 @@ import Header from '../Components/Header';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from './auth-context';
 
-export default function About(){
+export default function About({addToCart, setIsCartOpen, cartElements}){
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
 
@@ -20,7 +20,7 @@ export default function About(){
     function showPage(){
         return(
             <div>
-            <Header />
+            <Header addToCart={addToCart} setIsCartOpen={setIsCartOpen} cartElements={cartElements} />
     
     <section id="about">
         <h2 style={{ margin:'20px 0px 0px 0px'}}>About</h2>

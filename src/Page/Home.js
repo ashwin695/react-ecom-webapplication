@@ -3,7 +3,7 @@ import Header from "../Components/Header";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./auth-context";
 
-export default function Home(){
+export default function Home({addToCart, setIsCartOpen, cartElements}){
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
 
@@ -20,7 +20,7 @@ export default function Home(){
     function showPage(){
         return(
             <div>
-                <Header />
+                <Header addToCart={addToCart} setIsCartOpen={setIsCartOpen} cartElements={cartElements} />
 
                 <div style={{backgroundColor: 'grey', color:'#fff', fontFamily:'fantasy', display:'flex', justifyContent:'center', fontSize:40, padding:15, }}>
                     The Generics

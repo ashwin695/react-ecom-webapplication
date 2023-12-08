@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import AuthContext from "./auth-context";
 
-const cartElements = [
+const cartArr = [
     {
         id: 'album-1',
         title: 'Colors',      
@@ -34,7 +34,7 @@ const cartElements = [
     }
 ]
 
-export default function Store(){
+export default function Store({addToCart, setIsCartOpen, cartElements}){
     const navigate = useNavigate()
     const authCtx = useContext(AuthContext)
 
@@ -56,25 +56,25 @@ export default function Store(){
     function showPage(){
         return(
             <div>
-                <Header />
+                <Header addToCart={addToCart} setIsCartOpen={setIsCartOpen} cartElements={cartElements} />
     
         <section id="music" class="container">
             <h2>MUSIC</h2>
             <div id ="music-content">
                 {
-                    cartElements.map((item)=>{
+                    cartArr.map((item)=>{
                         return(
-                            <div id={item.id} onClick={()=>handleProductView(item)}>
-                                <h3>{item.title}</h3>
-                                <div class="image-container">
+                            <div id={item.id}>
+                                <h3 onClick={()=>handleProductView(item)}>{item.title}</h3>
+                                <div class="image-container" onClick={()=>handleProductView(item)}>
                                     <img class="prod-images" src={item.imageUrl} alt=""/>
                                 </div>
-                                <div class="prod-details">
+                                <div class="prod-details" onClick={()=>handleProductView(item)}>
                                     <span>Stock: {item.quantity} item left</span>
                                 </div>
                                 <div class="prod-details">
-                                    <span>{item.price}/-- rs</span>
-                                    <button class="shop-item-button" type='button'>ADD TO CART</button>
+                                    <span onClick={()=>handleProductView(item)}>{item.price}/-- rs</span>
+                                    <button class="shop-item-button" type='button' onClick={() => addToCart(item)}>ADD TO CART</button>
                                 </div>
                             </div>
                         )
@@ -83,7 +83,7 @@ export default function Store(){
             </div>
     
         </section>
-        <section id="cart" class="container">
+        {/* <section id="cart" class="container">
             <h2>CART</h2>
             <button class="cancel">X</button>
             <div class="cart-row cart-header">
@@ -123,9 +123,9 @@ export default function Store(){
                 </span>
             </div>
             <button class='purchase-btn' type='button'>PURCHASE</button>
-        </section>
+        </section> */}
     
-            <button class="cart-btn-bottom"> <a href="#cart" class="cart-bottom">See the cart</a></button>
+            <button class="cart-btn-bottom"> <a href="#cart" class="cart-bottom" onClick={() => setIsCartOpen(true)}>See the cart</a></button>
     
     
         <div id="container"></div>
